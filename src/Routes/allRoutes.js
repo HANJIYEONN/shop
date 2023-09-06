@@ -9,8 +9,14 @@ import Two from "../page/Event/Two";
 
 const publicRoutes = [
   { path: "/", component: <Main />, name: "홈" },
+  { path: "/error", component: <Error /> },
+  { path: "*", component: <Error /> },
+
+  //상세 페이지
   { path: "/detail", component: <Detail />, name: "상세페이지" },
-  { path: "/detail/:id", component: <Detail />, name: "상세페이지" },
+  { path: "/detail/:id", component: <Detail /> },
+
+  //about 페이지
   { path: "/about", component: <About />, name: "about" },
   {
     path: "member",
@@ -22,6 +28,8 @@ const publicRoutes = [
     component: <div>location</div>,
     upper: "/about",
   },
+
+  //event 페이지
   { path: "/event", component: <Event />, name: "event" },
   {
     path: "one",
@@ -33,8 +41,6 @@ const publicRoutes = [
     component: <Two />,
     upper: "/event",
   },
-  { path: "/error", component: <Error /> },
-  { path: "*", component: <Error /> },
 ];
 
 export { publicRoutes };

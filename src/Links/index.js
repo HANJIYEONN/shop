@@ -10,7 +10,7 @@ const Index = () => {
     <>
       <Navbar bg="light" data-bs-theme="light">
         <Container>
-          <Navbar.Brand href="#home">penguin</Navbar.Brand>
+          <Navbar.Brand href="/">penguin</Navbar.Brand>
           <Nav className="me-auto">
             {publicRoutes.map((route, idx) => (
               <Nav.Link
