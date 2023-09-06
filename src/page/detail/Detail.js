@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useImmer } from "use-immer";
 import styled from "styled-components";
 
-import penguinD from "../main/penguinData";
+import penguinD from "../Main/penguinData";
 
 function Detail(props) {
   let [penguinData] = useImmer(penguinD);
@@ -10,16 +10,28 @@ function Detail(props) {
 
   let item = penguinData.find((x) => x.id == id);
 
-  let YellowBtn = styled.button`
-    background: yellow;
-    color: black;
+  let Btn = styled.button`
+    background: ${(props) => props.bg};
+    color: ${(props) => (props.bg === "blue" ? "white" : "black")};
     padding: 10 px;
+  `;
+
+  let NewBtn = styled.button(Btn)`
+    padding: 20 px;
+  `;
+
+  let BlackBox = styled.div`
+    backgrousd: grey;
+    padding: 20px;
   `;
 
   return (
     <>
       <div className="container">
-        <YellowBtn>버튼</YellowBtn>
+        <BlackBox>
+          <Btn bg="yellow">버튼</Btn>
+          <Btn bg="blue">버튼</Btn>
+        </BlackBox>
         <div className="row">
           <div className="col-md-6">
             <img src={process.env.PUBLIC_URL + item.img} width="100%" />
