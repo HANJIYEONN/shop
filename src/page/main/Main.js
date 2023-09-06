@@ -1,16 +1,16 @@
 import MainTable from "./MainTable";
 import { useImmer } from "use-immer";
-import penguinD from "./penguinData";
+import penguinData from "./penguinData";
 import axios from "axios";
 
 function Main() {
-  let [penguinData] = useImmer(penguinD);
+  // let [penguinData] = useImmer(penguinD);
 
   const penguinCards = penguinData?.map((penguin, index) => (
     <MainTable
       key={index}
       id={penguin.id}
-      img={penguin.img}
+      img={penguin.img? penguin.img: "/img/아델리펭귄.jpg"}
       title={penguin.title}
       content={penguin.content}
     />
@@ -33,7 +33,9 @@ function Main() {
           axios
             .get("https://codingapple1.github.io/shop/data2.json")
             .then((result) => {
-              console.log("data", result.data);
+              result.data.forEach((penguin, index) => {
+                penguinData.push(penguin); // Add data to the penguinData array.
+              });
             })
             .catch(() => {
               alert("오류가 발생했습니다.");
