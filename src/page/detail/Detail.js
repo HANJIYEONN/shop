@@ -16,7 +16,7 @@ function Detail(props) {
     padding: 10 px;
   `;
 
-  let NewBtn = styled.button(Btn)`
+  let NewBtn = styled(Btn)`
     padding: 20 px;
   `;
 
