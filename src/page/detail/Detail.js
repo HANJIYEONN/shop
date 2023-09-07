@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import penguinD from "../Main/penguinData";
 import { useEffect, useState } from "react";
-import DetailTap from "./DetailTap";
+import DetailTap from "./DetailTab";
 
 function Detail(props) {
   let [penguinData] = useImmer(penguinD);
@@ -12,6 +12,8 @@ function Detail(props) {
   let [hide, setHide] = useState(false);
   let [text, setText] = useState("");
   let { id } = useParams();
+
+  const [fade, setFade] = useState("");
 
   if (!id) id = 0;
   let item = penguinData.find((x) => x.id == id);
@@ -25,7 +27,6 @@ function Detail(props) {
 
   useEffect(() => {
     let item = setTimeout(() => {
-      console.log("바위뛰기펭긴은 동서남북부 별로 있다.");
       setHide(true);
     }, 2000);
 
@@ -35,9 +36,20 @@ function Detail(props) {
   }, []);
   // []없으면 mount update 시 실행 []있으면 mount시에만 실행
 
+  useEffect(() => {
+    let timeout = setTimeout(() => {
+      setFade("end");
+    }, 100);
+
+    return () => {
+      clearTimeout(timeout);
+      setFade("");
+    };
+  }, []);
+
   return (
     <>
-      <div className="container">
+      <div className={"container start " + fade}>
         {!hide && (
           <div id="sale" className="alert alert-warning">
             2초 이내 후원시 선물
@@ -70,8 +82,9 @@ function Detail(props) {
             <button className="btn btn-success">후원하기</button>
           </div>
         </div>
+
+        <DetailTap />
       </div>
-      <DetailTap />
     </>
   );
 }
