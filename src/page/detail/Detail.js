@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import penguinD from "../Main/penguinData";
 import { useEffect, useState } from "react";
+import DetailTap from "./DetailTap";
 
 function Detail(props) {
   let [penguinData] = useImmer(penguinD);
@@ -70,6 +71,7 @@ function Detail(props) {
           </div>
         </div>
       </div>
+      <DetailTap />
     </>
   );
 }

@@ -1,20 +1,39 @@
 import MainTable from "./MainTable";
 import { useImmer } from "use-immer";
-import penguinData from "./penguinData";
+import penguinD from "./penguinData";
 import axios from "axios";
+import { useState } from "react";
 
 function Main() {
-  // let [penguinData] = useImmer(penguinD);
+  let [penguinData, setPenguinData] = useState(penguinD);
+  let [count, setCount] = useState(2);
 
   const penguinCards = penguinData?.map((penguin, index) => (
     <MainTable
       key={index}
       id={penguin.id}
-      img={penguin.img? penguin.img: "/img/아델리펭귄.jpg"}
+      img={penguin.img ? penguin.img : "/img/아델리펭귄.jpg"}
       title={penguin.title}
       content={penguin.content}
     />
   ));
+
+  const addItem = () => {
+    if (count > 3) {
+      alert("마지막 상품입니다.");
+      return false;
+    }
+    axios
+      .get("https://codingapple1.github.io/shop/data" + count + ".json")
+      .then((result) => {
+        let copy = [...penguinData, ...result.data];
+        setPenguinData(copy);
+        setCount(count + 1);
+      })
+      .catch(() => {
+        alert("오류가 발생했습니다.");
+      });
+  };
 
   return (
     <>
@@ -28,22 +47,7 @@ function Main() {
       <div className="container">
         <div className="row">{penguinCards}</div>
       </div>
-      <button
-        onClick={() => {
-          axios
-            .get("https://codingapple1.github.io/shop/data2.json")
-            .then((result) => {
-              result.data.forEach((penguin, index) => {
-                penguinData.push(penguin); // Add data to the penguinData array.
-              });
-            })
-            .catch(() => {
-              alert("오류가 발생했습니다.");
-            });
-        }}
-      >
-        버튼
-      </button>
+      <button onClick={() => addItem()}>버튼</button>
     </>
   );
 }
