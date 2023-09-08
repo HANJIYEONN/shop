@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+
+import { Context1 } from "./Detail.js";
 
 function TabContent({ tab }) {
   const [fade, setFade] = useState("");
+
+  let { penguinData } = useContext(Context1);
 
   useEffect(() => {
     let timeout = setTimeout(() => {
@@ -16,7 +20,11 @@ function TabContent({ tab }) {
 
   return (
     <div className={"start " + fade}>
-      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}
+      {
+        [<div>{penguinData[0].title}</div>, <div>내용1</div>, <div>내용2</div>][
+          tab
+        ]
+      }
     </div>
   );
 }

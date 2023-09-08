@@ -3,8 +3,10 @@ import { useImmer } from "use-immer";
 import styled from "styled-components";
 
 import penguinD from "../Main/penguinData";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import DetailTap from "./DetailTab";
+
+export let Context1 = createContext();
 
 function Detail(props) {
   let [penguinData] = useImmer(penguinD);
@@ -12,7 +14,6 @@ function Detail(props) {
   let [hide, setHide] = useState(false);
   let [text, setText] = useState("");
   let { id } = useParams();
-
   const [fade, setFade] = useState("");
 
   if (!id) id = 0;
@@ -82,8 +83,9 @@ function Detail(props) {
             <button className="btn btn-success">후원하기</button>
           </div>
         </div>
-
-        <DetailTap />
+        <Context1.Provider value={{ penguinData }}>
+          <DetailTap />
+        </Context1.Provider>
       </div>
     </>
   );
