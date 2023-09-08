@@ -14,6 +14,7 @@ const Index = () => {
           <Nav className="me-auto">
             {publicRoutes.map((route, idx) => (
               <Nav.Link
+                key={idx}
                 onClick={() => {
                   navigate(route.path);
                 }}
