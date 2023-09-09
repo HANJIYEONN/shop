@@ -4,7 +4,14 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 let user = createSlice({
   name: "user",
   initialState: "kim",
+  reducers : {
+    changeName(state){
+      return 'john ' + state
+    }
+  }
 });
+
+export let {changeName} = user.actions
 
 let stock = createSlice({
   name: "stock",
@@ -17,8 +24,14 @@ let cart = createSlice({
     { id: 0, name: "White and Black", count: 2 },
     { id: 2, name: "Grey Yordan", count: 1 },
   ],
-  reducer: {
-    함수1() {},
+  reducers: {
+    addCount: (state, action) => {
+      const itemId = action.payload; // Assuming you pass the item's ID as payload
+      const itemToUpdate = state.find((item) => item.id === itemId);
+      if (itemToUpdate) {
+        itemToUpdate.count += 1;
+      }
+    },
   },
 });
 
