@@ -44,6 +44,14 @@ function Detail(props) {
       setHide(true);
     }, 2000);
 
+    const storedIds = localStorage.getItem("watched")
+      ? JSON.parse(localStorage.getItem("watched"))
+      : [];
+
+    storedIds.push(id);
+
+    localStorage.setItem("watched", JSON.stringify(storedIds));
+
     return () => {
       clearTimeout(_item);
     };
