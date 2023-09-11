@@ -1,14 +1,19 @@
 import { useParams } from "react-router-dom";
 import { useImmer } from "use-immer";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import penguinD from "../Main/penguinData";
 import { createContext, useEffect, useState } from "react";
 import DetailTap from "./DetailTab";
+import { useDispatch } from "react-redux";
+import { addCart } from "../../Store/cartSlice";
 
 export let Context1 = createContext();
 
 function Detail(props) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   let [penguinData] = useImmer(penguinD);
   let [count, setCount] = useState(0);
   let [hide, setHide] = useState(false);
@@ -19,6 +24,14 @@ function Detail(props) {
   if (!id) id = 0;
   let item = penguinData.find((x) => x.id == id);
 
+  const addCartItem = () => {
+    dispatch(addCart(item));
+
+    if (window.confirm("장바구니로 이동하시겠습니까?")) {
+      navigate("/cart");
+    }
+  };
+
   useEffect(() => {
     if (isNaN(text)) {
       alert("숫자만 입력해주세요.");
@@ -27,12 +40,12 @@ function Detail(props) {
   }, [text]);
 
   useEffect(() => {
-    let item = setTimeout(() => {
+    let _item = setTimeout(() => {
       setHide(true);
     }, 2000);
 
     return () => {
-      clearTimeout(item);
+      clearTimeout(_item);
     };
   }, []);
   // []없으면 mount update 시 실행 []있으면 mount시에만 실행
@@ -80,7 +93,14 @@ function Detail(props) {
                 value={text}
               />
             </p>
-            <button className="btn btn-success">후원하기</button>
+            <button
+              className="btn btn-success"
+              onClick={() => {
+                addCartItem();
+              }}
+            >
+              후원하기
+            </button>
           </div>
         </div>
         <Context1.Provider value={{ penguinData }}>
