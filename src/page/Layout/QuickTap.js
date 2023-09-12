@@ -27,11 +27,6 @@ function QuickTap() {
   const viewItem = () => {
     const watchedItem = JSON.parse(localStorage.getItem("watched"));
 
-    {
-      watchedItem.map((item, i) => {
-        console.log("item", item);
-      });
-    }
     return (
       <>
         {watchedItem.map((item, i) => {
