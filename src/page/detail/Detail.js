@@ -47,10 +47,12 @@ function Detail(props) {
     const storedIds = localStorage.getItem("watched")
       ? JSON.parse(localStorage.getItem("watched"))
       : [];
+    storedIds.unshift(id);
 
-    storedIds.push(id);
+    let itemId = new Set(storedIds);
+    itemId = Array.from(itemId);
 
-    localStorage.setItem("watched", JSON.stringify(storedIds));
+    localStorage.setItem("watched", JSON.stringify(itemId));
 
     return () => {
       clearTimeout(_item);

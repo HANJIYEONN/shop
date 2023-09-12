@@ -2,7 +2,8 @@ import MainTable from "./MainTable";
 import { useImmer } from "use-immer";
 import penguinD from "./penguinData";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 
 function Main() {
   let [penguinData, setPenguinData] = useState(penguinD);
@@ -37,17 +38,23 @@ function Main() {
 
   return (
     <>
-      <div className="main-bg">
-        <img
-          src={process.env.PUBLIC_URL + "/img/바탕화면.jpg"}
-          className="main-pg"
-        />
+      <div>
+        <div className="main-bg">
+          <img
+            src={process.env.PUBLIC_URL + "/img/바탕화면.jpg"}
+            className="main-pg"
+          />
+        </div>
+        <br />
+        <div className="container">
+          <div className="row">{penguinCards}</div>
+          <div className="d-grid gap-2">
+            <Button variant="secondary" size="lg" onClick={() => addItem()}>
+              버튼
+            </Button>
+          </div>
+        </div>
       </div>
-      <br />
-      <div className="container">
-        <div className="row">{penguinCards}</div>
-      </div>
-      <button onClick={() => addItem()}>버튼</button>
     </>
   );
 }
