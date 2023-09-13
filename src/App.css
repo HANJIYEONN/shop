@@ -45,36 +45,6 @@ a {
   color: #999;
   border: 1px solid #999;
 }
-/* .quickmenu ul {
-  position: relative;
-  float: left;
-  width: 100%;
-  display: inline-block;
-  border: 1px solid #ddd;
-}
-.quickmenu ul li {
-  float: left;
-  width: 100%;
-  border-bottom: 1px solid #ddd;
-  text-align: center;
-  display: inline-block;
-}
-.quickmenu ul li a {
-  position: relative;
-  float: left;
-  width: 100%;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  color: #999;
-  font-size: 9.5pt;
-}
-.quickmenu ul li a:hover {
-  color: #000;
-}
-.quickmenu ul li:last-child {
-  border-bottom: 0;
-} */
 
 #wing-recent-prd .no-prd {
   padding-bottom: 10px;
@@ -87,4 +57,9 @@ a {
 .quickTap img {
   width: 100px;
   height: 100px;
+}
+
+/*사용자*/
+.ms-auto:hover {
+  cursor:pointer
 }

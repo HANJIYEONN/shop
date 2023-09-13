@@ -1,6 +1,7 @@
 import React from "react";
 import { publicRoutes } from "./allRoutes";
 import { Routes, Route } from "react-router-dom";
+import { Nav } from "react-bootstrap";
 
 const Index = () => {
   return (
@@ -30,7 +31,7 @@ const Index = () => {
               </Route>
             );
           }
-          return null; // If the route is marked as "upper," you can return null or handle it as needed.
+          return null;
         })}
       </Routes>
     </>
