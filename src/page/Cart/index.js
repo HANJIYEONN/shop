@@ -2,11 +2,20 @@ import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { changeName, changeAge } from "../../Store/userSlice";
 import { addCount } from "../../Store/cartSlice";
+import { useState } from "react";
+import Child from "./Child";
+
+// function 함수(){
+//   return 반복문 10억번 돌린 결과
+// }
 
 function Cart() {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const [count, setCount] = useState(0);
+
+  // let result = useMemo(()=>{return 함수()},[state]) 
 
   let tbody = cart.map((item, idx) => (
     <tr key={idx}>
@@ -28,6 +37,8 @@ function Cart() {
 
   return (
     <>
+    <Child count={count}/>
+    <Button onClick={()=>{setCount(count+1) }}>+</Button>
       <h6>
         {user.name} {user.age} 의 장바구니
       </h6>
